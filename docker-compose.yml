@@ -17,6 +17,27 @@ services:
       RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
 
+  pgadmin:
+    image: dpage/pgadmin4:9.8
+    ports:
+      - 5050:80
+    env_file: ./.env
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    volumes:
+    - pgadmin_data:/var/lib/pgadmin
+
+  database:
+    image: postgres:16
+    container_name: postgres_db
+    restart: always
+    env_file: ./backend/.env
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
   microservice-1-backend:
     build:
       context: ./microservice-1
@@ -46,3 +67,7 @@ services:
     volumes:
       - ./microservice-2:/app
       - /app/node_modules 
+
+volumes:
+  postgres_data: {}
+  pgadmin_data: {}
