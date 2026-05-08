@@ -17,26 +17,47 @@ services:
       RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
 
-  pgadmin:
+  pgadmin-1:
     image: dpage/pgadmin4:9.8
     ports:
-      - 5050:80
+      - 5051:80
     env_file: ./.env
     environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
-      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_1_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_1_DEFAULT_PASSWORD}
     volumes:
-    - pgadmin_data:/var/lib/pgadmin
+    - pgadmin_data_1:/var/lib/pgadmin
 
-  database:
+  database-1:
     image: postgres:16
-    container_name: postgres_db
+    container_name: postgres_db_1
     restart: always
-    env_file: ./backend/.env
+    env_file: ./microservice-1/.env
     ports:
       - "5433:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data_1:/var/lib/postgresql/data
+
+  pgadmin-2:
+    image: dpage/pgadmin4:9.8
+    ports:
+      - 5052:80
+    env_file: ./.env
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_2_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_2_DEFAULT_PASSWORD}
+    volumes:
+    - pgadmin_data_2:/var/lib/pgadmin
+
+  database-2:
+    image: postgres:16
+    container_name: postgres_db_2
+    restart: always
+    env_file: ./microservice-2/.env
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres_data_2:/var/lib/postgresql/data
 
   microservice-1-backend:
     build:
@@ -69,5 +90,7 @@ services:
       - /app/node_modules 
 
 volumes:
-  postgres_data: {}
-  pgadmin_data: {}
+  postgres_data_1: {}
+  pgadmin_data_1: {}
+  postgres_data_2: {}
+  pgadmin_data_2: {}
