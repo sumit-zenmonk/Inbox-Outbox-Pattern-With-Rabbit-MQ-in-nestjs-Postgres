@@ -4,7 +4,7 @@ import { OutboxStatusEnum } from "./outbox.enum";
 @Entity('outbox')
 export class OutboxEntity {
     @PrimaryGeneratedColumn()
-    id: string;
+    id: number;
 
     @Column()
     @Generated('uuid')
