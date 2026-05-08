@@ -12,6 +12,7 @@ export class InboxMigration1778222237235 implements MigrationInterface {
                     { name: "id", type: "serial", isPrimary: true },
                     { name: "uuid", type: "uuid", default: "uuid_generate_v4()" },
                     { name: "message_id", type: "varchar", isNullable: false },
+                    { name: "handler_name", type: "varchar", isNullable: false },
                     { name: "consumer_name", type: "varchar", isNullable: false },
                     { name: "event_type", type: "varchar", isNullable: false },
                     { name: "message_payload", type: "jsonb", isNullable: false },

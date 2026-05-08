@@ -1,13 +1,4 @@
-import {
-    Column,
-    CreateDateColumn,
-    DeleteDateColumn,
-    Entity,
-    Generated,
-    PrimaryGeneratedColumn,
-    Unique,
-    UpdateDateColumn
-} from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, Generated, PrimaryGeneratedColumn, Unique, UpdateDateColumn } from "typeorm";
 
 @Entity("inbox")
 @Unique(["message_id", "consumer_name"])
@@ -21,6 +12,9 @@ export class InboxEntity {
 
     @Column({ type: "varchar", nullable: false })
     message_id: string;
+
+    @Column({ type: "varchar", nullable: false })
+    handler_name: string;
 
     @Column({ type: "varchar", nullable: false })
     consumer_name: string;
