@@ -5,7 +5,7 @@ export class OutboxMigration1778222237233 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(
-            `CREATE TYPE "public"."outbox_status_enum" AS ENUM('pending', 'success', 'rejected')`
+            `CREATE TYPE "public"."outbox_status_enum" AS ENUM('pending', 'published', 'failed')`
         );
 
         await queryRunner.createTable(
@@ -19,7 +19,7 @@ export class OutboxMigration1778222237233 implements MigrationInterface {
                     { name: "routing_key", type: "varchar", isNullable: false },
                     { name: "message_payload", type: "jsonb", isNullable: false },
                     { name: "header_payload", type: "jsonb", isNullable: false },
-                    { name: "role", type: "outbox_status_enum", default: `'pending'`, isNullable: false },
+                    { name: "status", type: "outbox_status_enum", default: `'pending'`, isNullable: false },
                     { name: "created_at", type: "timestamp", default: "now()" },
                     { name: "updated_at", type: "timestamp", default: "now()" },
                     { name: "deleted_at", type: "timestamp", isNullable: true }

@@ -1,5 +1,5 @@
 export enum OutboxStatusEnum {
     PENDING = 'pending',
-    SUCCESS = 'success',
-    REJECTED = 'rejected'
+    PUBLISHED = 'published',
+    FAILED = 'failed'
 }
