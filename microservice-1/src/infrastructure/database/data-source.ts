@@ -4,6 +4,7 @@ import 'dotenv/config';
 
 //Entities
 import { OutboxEntity } from "src/domain/outbox/outbox.entity";
+import { InboxEntity } from "src/domain/inbox/inbox.entity";
 
 const options: DataSourceOptions = {
     type: process.env.DB_POSTGRES_TYPE as any,
@@ -13,7 +14,7 @@ const options: DataSourceOptions = {
     password: process.env.DB_POSTGRES_PASSWORD,
     database: process.env.DB_POSTGRES_DATABASE,
     entities: [
-        OutboxEntity
+        OutboxEntity, InboxEntity
     ],
     synchronize: false,
     migrations: ['dist/infrastructure/database/migrations/*{.ts,.js}'],
