@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { RabbitMQModule } from './infrastructure/rabbit-mq/rabbit-mq.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { dataSource } from './infrastructure/database/data-source';
+import { UserPreferenceModule } from './feature/user/user.module';
 
 @Module({
   imports: [
@@ -19,7 +20,8 @@ import { dataSource } from './infrastructure/database/data-source';
     }),
 
     // Modules
-    RabbitMQModule
+    RabbitMQModule,
+    UserPreferenceModule
   ],
   controllers: [AppController],
   providers: [AppService],
