@@ -3,12 +3,16 @@ import { NotificationPreference, ThemePreference, TimeFormatPreference } from ".
 
 @Entity("user_preference")
 export class UserPreferenceEntity {
-    @PrimaryGeneratedColumn()
-    id: number;
-
-    @Column()
-    @Generated("uuid")
+    @PrimaryGeneratedColumn("uuid")
     uuid: string;
+
+    @Column({
+        type: "bigint",
+        generated: "increment",
+        unique: true,
+        select: false,
+    })
+    id: number;
 
     @Column({ type: "uuid" })
     user_uuid: string;

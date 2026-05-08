@@ -1,14 +1,17 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, Generated, PrimaryGeneratedColumn, Unique, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, Generated, PrimaryColumn, PrimaryGeneratedColumn, Unique, UpdateDateColumn } from "typeorm";
 
 @Entity("inbox")
-@Unique(["message_id", "consumer_name"])
 export class InboxEntity {
-    @PrimaryGeneratedColumn()
-    id: number;
-
-    @Column()
-    @Generated("uuid")
+    @PrimaryGeneratedColumn("uuid")
     uuid: string;
+
+    @Column({
+        type: "bigint",
+        generated: "increment",
+        unique: true,
+        select: false,
+    })
+    id: number;
 
     @Column({ type: "varchar", nullable: false })
     message_id: string;

@@ -1,13 +1,17 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, Generated, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, Generated, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity('user')
 export class UserEntity {
-    @PrimaryGeneratedColumn()
-    id: number;
-
-    @Column()
-    @Generated('uuid')
+    @PrimaryGeneratedColumn("uuid")
     uuid: string;
+
+    @Column({
+        type: "bigint",
+        generated: "increment",
+        unique: true,
+        select: false,
+    })
+    id: number;
 
     @Column({ type: "varchar", nullable: false, })
     name: string;

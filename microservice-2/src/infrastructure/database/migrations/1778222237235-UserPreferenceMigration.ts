@@ -13,8 +13,8 @@ export class UserPreferenceMigration1778222237234
             new Table({
                 name: "user_preference",
                 columns: [
-                    { name: "id", type: "serial", isPrimary: true, },
-                    { name: "uuid", type: "uuid", default: "uuid_generate_v4()", },
+                    { name: "id", type: "bigserial", isUnique: true, },
+                    { name: "uuid", type: "uuid", default: "uuid_generate_v4()", isPrimary: true, },
                     { name: "user_uuid", type: "uuid", isNullable: false, },
                     { name: "theme_preference", type: "user_preference_theme_preference_enum", default: `'system'`, isNullable: false, },
                     { name: "notification_preference", type: "user_preference_notification_preference_enum", default: `'all'`, isNullable: false, },

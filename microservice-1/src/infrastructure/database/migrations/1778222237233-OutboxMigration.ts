@@ -12,8 +12,8 @@ export class OutboxMigration1778222237233 implements MigrationInterface {
             new Table({
                 name: "outbox",
                 columns: [
-                    { name: "id", type: "serial", isPrimary: true },
-                    { name: "uuid", type: "uuid", default: "uuid_generate_v4()" },
+                    { name: "id", type: "bigserial", isUnique: true, },
+                    { name: "uuid", type: "uuid", default: "uuid_generate_v4()", isPrimary: true, },
                     { name: "event_type", type: "varchar", isNullable: false },
                     { name: "exchange_name", type: "varchar", isNullable: false },
                     { name: "routing_key", type: "varchar", isNullable: false },

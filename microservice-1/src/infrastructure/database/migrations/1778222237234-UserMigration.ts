@@ -8,8 +8,8 @@ export class UserMigration1778222237234 implements MigrationInterface {
             new Table({
                 name: "user",
                 columns: [
-                    { name: "id", type: "serial", isPrimary: true, },
-                    { name: "uuid", type: "uuid", default: "uuid_generate_v4()", },
+                    { name: "id", type: "bigserial", isUnique: true, },
+                    { name: "uuid", type: "uuid", default: "uuid_generate_v4()", isPrimary: true, },
                     { name: "name", type: "varchar", isNullable: false, },
                     { name: "email", type: "varchar", isNullable: false, isUnique: true },
                     { name: "created_at", type: "timestamp", default: "CURRENT_TIMESTAMP", },
